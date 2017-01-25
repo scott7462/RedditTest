@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Reddit Test</string>
+    <string name="base_url">https://www.reddit.com/</string>
+    <string name="frg_detail_create">Created at: %1$s</string>
+    <string name="frg_detail_lang">Language: %1$s</string>
+    <string name="frg_detail_subs">Subscriber: %1$d</string>
+    <string name="frg_main_no_theme">Not Themes Available.</string>
+    <string name="frg_details_description">Description:</string>
+    <string name="frg_details_submit_text">Submit Text:</string>
+</resources>
