@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="scott.android.com.reddittest">
+    package="scott.android.com.repository">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="scott.android.com.reddittest.app.App"
+        android:name="scott.android.com.repository.app.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="scott.android.com.reddittest.app.ui.launch.ActivityLaunch"
+            android:name="scott.android.com.repository.app.ui.launch.ActivityLaunch"
             android:screenOrientation="portrait"
             android:theme="@style/LaunchTheme">
             <intent-filter>
@@ -24,12 +24,12 @@
 
 
         <activity
-            android:name="scott.android.com.reddittest.app.ui.MainActivity"
+            android:name="scott.android.com.repository.app.ui.MainActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name="scott.android.com.reddittest.app.ui.details.DetailsActivity"
+            android:name="scott.android.com.repository.app.ui.details.DetailsActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:theme="@style/AppTheme.NoActionBar" />
 
