@@ -233,6 +233,7 @@ public class Theme implements Parcelable {
     };
 
     public static final class Builder {
+
         private String bannerImg;
         private String id;
         private String submitText;

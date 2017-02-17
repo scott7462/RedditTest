@@ -4,6 +4,8 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import scott.android.com.repository.data.managers.db.DBConstraints;
+import scott.android.com.repository.entities.Theme;
+
 /**
  * @author pedroscott. scott7462@gmail.com
  * @version 1/19/17.
@@ -168,6 +170,22 @@ public class ThemeTable {
         this.created = created;
     }
 
+    public static Theme toTheme(ThemeTable themeTable) {
+        return Theme.newBuilder()
+                .withId(themeTable.getId())
+                .withTitle(themeTable.getTitle())
+                .withDescription(themeTable.getDescription())
+                .withName(themeTable.getName())
+                .withBannerImg(themeTable.getBannerImg())
+                .withDisplayName(themeTable.getDisplayName())
+                .withCreated(themeTable.getCreated())
+                .withIconImg(themeTable.getIconImg())
+                .withLang(themeTable.getLang())
+                .withSubmitText(themeTable.getSubmitText())
+                .withSubscribers(themeTable.getSubscribers())
+                .build();
+    }
+
 
     public static final class Builder {
         private String id;
@@ -249,5 +267,22 @@ public class ThemeTable {
         public ThemeTable build() {
             return new ThemeTable(this);
         }
+
+        public ThemeTable withTheme(Theme theme) {
+            return ThemeTable.newBuilder()
+                    .withId(theme.getId())
+                    .withTitle(theme.getTitle())
+                    .withDescription(theme.getDescription())
+                    .withName(theme.getName())
+                    .withBannerImg(theme.getBannerImg())
+                    .withDisplayName(theme.getDisplayName())
+                    .withCreated(theme.getCreated())
+                    .withIconImg(theme.getIconImg())
+                    .withLang(theme.getLang())
+                    .withSubmitText(theme.getSubmitText())
+                    .withSubscribers(theme.getSubscribers())
+                    .build();
+        }
+
     }
 }

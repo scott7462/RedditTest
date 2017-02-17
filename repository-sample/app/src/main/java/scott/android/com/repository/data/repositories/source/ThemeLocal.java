@@ -59,19 +59,7 @@ public final class ThemeLocal implements ThemeDataSource {
                         List<ThemeTable> themeTables = themeDao.queryBuilder().query();
                         List<Theme> themes = new ArrayList<>();
                         for (ThemeTable themeTable : themeTables) {
-                            themes.add(Theme.newBuilder()
-                                    .withId(themeTable.getId())
-                                    .withTitle(themeTable.getTitle())
-                                    .withDescription(themeTable.getDescription())
-                                    .withName(themeTable.getName())
-                                    .withBannerImg(themeTable.getBannerImg())
-                                    .withDisplayName(themeTable.getDisplayName())
-                                    .withCreated(themeTable.getCreated())
-                                    .withIconImg(themeTable.getIconImg())
-                                    .withLang(themeTable.getLang())
-                                    .withSubmitText(themeTable.getSubmitText())
-                                    .withSubscribers(themeTable.getSubscribers())
-                                    .build());
+                            themes.add(ThemeTable.toTheme(themeTable));
                         }
                         subscriber.onNext(themes);
                     } catch (SQLException e) {
@@ -113,27 +101,14 @@ public final class ThemeLocal implements ThemeDataSource {
                 }).toList();
     }
 
-    private Observable<Theme> addOrRemoveFavorite(final Theme theme) {
+    private Observable<Theme> addOrRemoveFavorite(Theme theme) {
         return Observable.just(theme)
                 .flatMap(new Func1<Theme, Observable<Theme>>() {
                     @Override
                     public Observable<Theme> call(Theme theme) {
                         try {
                             Dao<ThemeTable, Long> themeTables = getDBSQLHelper().getThemeDao();
-                            themeTables
-                                    .createOrUpdate(ThemeTable.newBuilder()
-                                            .withId(theme.getId())
-                                            .withTitle(theme.getTitle())
-                                            .withDescription(theme.getDescription())
-                                            .withName(theme.getName())
-                                            .withBannerImg(theme.getBannerImg())
-                                            .withDisplayName(theme.getDisplayName())
-                                            .withCreated(theme.getCreated())
-                                            .withIconImg(theme.getIconImg())
-                                            .withLang(theme.getLang())
-                                            .withSubmitText(theme.getSubmitText())
-                                            .withSubscribers(theme.getSubscribers())
-                                            .build());
+                            themeTables.createOrUpdate(ThemeTable.newBuilder().withTheme(theme));
                         } catch (SQLException e) {
                             e.printStackTrace();
                             Observable.error(e);
