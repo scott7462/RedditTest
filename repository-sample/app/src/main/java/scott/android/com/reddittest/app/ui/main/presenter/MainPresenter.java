@@ -4,7 +4,7 @@ import java.util.List;
 
 import rx.Subscriber;
 import scott.android.com.reddittest.base.presenter.BasePresenter;
-import scott.android.com.reddittest.data.Injection;
+import scott.android.com.reddittest.data.repositories.Injection;
 import scott.android.com.reddittest.entities.Theme;
 import timber.log.Timber;
 
