@@ -3,6 +3,7 @@ package scott.android.com.repository.data;
 
 import scott.android.com.repository.data.repositories.ThemeRepository;
 import scott.android.com.repository.data.repositories.source.ThemeLocal;
+import scott.android.com.repository.data.repositories.source.ThemeLocalRealm;
 import scott.android.com.repository.data.repositories.source.ThemeRemote;
 
 /**
@@ -26,7 +27,7 @@ import scott.android.com.repository.data.repositories.source.ThemeRemote;
 public class Injection {
 
     public static ThemeRepository provideThemeRepository() {
-        return ThemeRepository.newInstance(ThemeLocal.newInstance(), ThemeRemote.newInstance());
+        return ThemeRepository.newInstance(ThemeLocalRealm.newInstance(), ThemeRemote.newInstance());
     }
 
 }

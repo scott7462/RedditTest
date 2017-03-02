@@ -43,7 +43,7 @@ public final class ThemeRemote implements ThemeDataSource {
     }
 
     private void restInt() {
-        restClientPublic = new RestClientPublic(App.getGlobalContext().getString(R.string.base_url));
+        restClientPublic = new RestClientPublic();
     }
 
     private static ThemeRemote instance = null;

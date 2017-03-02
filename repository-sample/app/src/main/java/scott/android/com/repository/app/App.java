@@ -5,6 +5,8 @@ import android.support.multidex.MultiDexApplication;
 
 import com.facebook.stetho.Stetho;
 
+import io.realm.Realm;
+
 /**
  * @author pedroscott. scott7462@gmail.com
  * @version 1/15/17.
@@ -26,10 +28,12 @@ import com.facebook.stetho.Stetho;
 public class App extends MultiDexApplication {
 
     private static Context globalContext;
+
     @Override
     public void onCreate() {
         super.onCreate();
         globalContext = getApplicationContext();
+        Realm.init(this);
         Stetho.initializeWithDefaults(this);
     }
 

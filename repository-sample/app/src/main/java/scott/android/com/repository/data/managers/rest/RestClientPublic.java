@@ -7,6 +7,8 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import scott.android.com.repository.R;
+import scott.android.com.repository.app.App;
 
 /**
  * @author pedroscott. scott7462@gmail.com
@@ -30,9 +32,9 @@ public class RestClientPublic {
 
     private PublicService publicService;
 
-    public RestClientPublic(String baseUrl) {
+    public RestClientPublic() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl(App.getGlobalContext().getString(R.string.base_url))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(getClient())
