@@ -3,6 +3,8 @@ package scott.android.com.repository.base.view;
 import android.content.Context;
 import android.support.annotation.CallSuper;
 
+import javax.inject.Inject;
+
 import scott.android.com.repository.base.presenter.BasePresenter;
 import scott.android.com.repository.base.presenter.BasePresenterListener;
 

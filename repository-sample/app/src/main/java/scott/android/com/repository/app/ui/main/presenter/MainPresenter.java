@@ -1,12 +1,15 @@
 package scott.android.com.repository.app.ui.main.presenter;
 
+import android.support.annotation.NonNull;
+
 import java.util.List;
 
-import rx.Subscriber;
+import javax.inject.Inject;
+
+import scott.android.com.repository.app.ui.main.use_case.GetThemesUseCase;
 import scott.android.com.repository.base.presenter.BasePresenter;
-import scott.android.com.repository.data.Injection;
+import scott.android.com.repository.base.use_case.UseCaseSubscription;
 import scott.android.com.repository.entities.Theme;
-import timber.log.Timber;
 
 /**
  * @author pedroscott. scott7462@gmail.com
@@ -30,24 +33,31 @@ import timber.log.Timber;
 
 public class MainPresenter extends BasePresenter<MainPresenterListener> {
 
+    private GetThemesUseCase getThemesUseCase;
+
+    @Inject
+    public MainPresenter(@NonNull GetThemesUseCase getThemesUseCase) {
+        this.getThemesUseCase = getThemesUseCase;
+    }
+
     public void doGetTheme() {
-        addSubscription(Injection.provideThemeRepository()
-                .getThemes().subscribe(new Subscriber<List<Theme>>() {
+        getThemesUseCase.execute(
+                new UseCaseSubscription<List<Theme>>() {
                     @Override
                     public void onCompleted() {
-
+                        super.onCompleted();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Timber.e(e.getMessage());
+                        super.onError(e);
                     }
 
                     @Override
                     public void onNext(List<Theme> themes) {
+                        super.onNext(themes);
                         getViewListener().itemsLoaded(themes);
                     }
-                }));
-
+                });
     }
 }

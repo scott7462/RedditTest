@@ -6,6 +6,9 @@ import android.support.multidex.MultiDexApplication;
 import com.facebook.stetho.Stetho;
 
 import io.realm.Realm;
+import scott.android.com.repository.di.components.DaggerMainComponent;
+import scott.android.com.repository.di.components.MainComponent;
+import scott.android.com.repository.di.modules.MainModule;
 
 /**
  * @author pedroscott. scott7462@gmail.com
@@ -29,12 +32,23 @@ public class App extends MultiDexApplication {
 
     private static Context globalContext;
 
+    private MainComponent mainComponent;
+
     @Override
     public void onCreate() {
         super.onCreate();
         globalContext = getApplicationContext();
         Realm.init(this);
         Stetho.initializeWithDefaults(this);
+        initializeInjector();
+    }
+
+    private void initializeInjector() {
+        mainComponent = DaggerMainComponent.builder().mainModule(new MainModule(this)).build();
+    }
+
+    public MainComponent getMainComponent() {
+        return mainComponent;
     }
 
     public static Context getGlobalContext() {

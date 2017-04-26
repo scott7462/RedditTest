@@ -6,13 +6,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Func1;
-import scott.android.com.repository.app.App;
-import scott.android.com.repository.data.repositories.ThemeDataSource;
 import scott.android.com.repository.data.managers.db.DBSQLiteHelper;
 import scott.android.com.repository.data.managers.db.tables.ThemeTable;
+import scott.android.com.repository.data.repositories.ThemeDataSource;
 import scott.android.com.repository.entities.Theme;
 
 /**
@@ -33,19 +35,15 @@ import scott.android.com.repository.entities.Theme;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class ThemeLocal implements ThemeDataSource {
-
-    private static ThemeLocal instance = null;
+@Singleton
+public class ThemeLocal implements ThemeDataSource {
 
     private static DBSQLiteHelper getDBSQLHelper() {
         return DBSQLiteHelper.newInstance();
     }
 
-    public static ThemeLocal newInstance() {
-        if (instance == null) {
-            instance = new ThemeLocal();
-        }
-        return instance;
+    @Inject
+    public ThemeLocal() {
     }
 
     @Override

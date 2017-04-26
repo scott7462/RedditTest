@@ -186,7 +186,6 @@ public class ThemeTable {
                 .build();
     }
 
-
     public static final class Builder {
         private String id;
         private String bannerImg;

@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
+import scott.android.com.repository.app.App;
 import scott.android.com.repository.bus.event.EventSnackBar;
 
 /**

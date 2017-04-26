@@ -32,9 +32,18 @@ public class RestClientPublic {
 
     private PublicService publicService;
 
+    private static RestClientPublic instance;
+
+    public static RestClientPublic getInstance() {
+        if (instance == null) {
+            instance = new RestClientPublic();
+        }
+        return instance;
+    }
+
     public RestClientPublic() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(App.getGlobalContext().getString(R.string.base_url))
+                .baseUrl("https://www.reddit.com/")
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(getClient())

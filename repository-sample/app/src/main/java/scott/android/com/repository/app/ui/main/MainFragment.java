@@ -10,8 +10,11 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import scott.android.com.repository.R;
+import scott.android.com.repository.app.App;
 import scott.android.com.repository.app.ui.details.DetailsActivity;
 import scott.android.com.repository.app.ui.main.presenter.MainPresenter;
 import scott.android.com.repository.app.ui.main.presenter.MainPresenterListener;
@@ -38,13 +41,15 @@ import scott.android.com.repository.utils.MarginDecoration;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 public class MainFragment extends BaseFragmentMVPList<MainPresenter, Theme, ThemeAdapter> implements MainPresenterListener {
 
     @BindView(R.id.rVFrgHome)
     RecyclerView rVFrgHome;
     @BindView(R.id.sRFrgHome)
     SwipeRefreshLayout sRFrgHome;
+
+    @Inject
+    MainPresenter presenter;
 
     public static MainFragment newInstance() {
         Bundle args = new Bundle();
@@ -65,7 +70,8 @@ public class MainFragment extends BaseFragmentMVPList<MainPresenter, Theme, Them
         setHasOptionsMenu(true);
         setRetainInstance(true);
         setAdapter(new ThemeAdapter());
-        setPresenter(new MainPresenter());
+        initializeDagger();
+        setPresenter(presenter);
         getPresenter().doGetTheme();
         getAdapter().showLoadingState(true);
         getAdapter().addClickListener(new BaseSimpleAdapter.onItemClickListener<Theme>() {
@@ -109,4 +115,12 @@ public class MainFragment extends BaseFragmentMVPList<MainPresenter, Theme, Them
     protected void onMoreItemsLoaded(List<Theme> newItems) {
 
     }
+
+
+    private void initializeDagger() {
+        App app = (App) getActivity().getApplication();
+        app.getMainComponent().inject(this);
+    }
+
+
 }

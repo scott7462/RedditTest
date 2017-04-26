@@ -1,14 +1,10 @@
-package scott.android.com.repository.data;
+package scott.android.com.repository.base.use_case;
 
-
-import scott.android.com.repository.data.repositories.ThemeRepository;
-import scott.android.com.repository.data.repositories.source.ThemeLocal;
-import scott.android.com.repository.data.repositories.source.ThemeLocalRealm;
-import scott.android.com.repository.data.repositories.source.ThemeRemote;
+import rx.Subscriber;
 
 /**
  * @author pedroscott. scott7462@gmail.com
- * @version 1/19/17.
+ * @version 4/14/17.
  *          <p>
  *          Copyright (C) 2015 The Android Open Source Project
  *          <p/>
@@ -24,10 +20,22 @@ import scott.android.com.repository.data.repositories.source.ThemeRemote;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class Injection {
 
-    public static ThemeRepository provideThemeRepository() {
-        return new ThemeRepository(new ThemeLocal(),new ThemeRemote());
+
+public abstract class UseCaseSubscription<T> extends Subscriber<T> {
+
+    @Override
+    public void onCompleted() {
+
     }
 
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onNext(T t) {
+
+    }
 }

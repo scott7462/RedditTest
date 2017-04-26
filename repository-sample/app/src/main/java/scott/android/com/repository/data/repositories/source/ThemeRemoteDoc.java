@@ -2,9 +2,6 @@ package scott.android.com.repository.data.repositories.source;
 
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import rx.Observable;
 import rx.functions.Func1;
 import scott.android.com.repository.data.managers.rest.RestClientPublic;
@@ -14,34 +11,29 @@ import scott.android.com.repository.data.repositories.ThemeDataSource;
 import scott.android.com.repository.entities.Theme;
 
 /**
- * @author pedroscott. scott7462@gmail.com
- * @version 1/23/17.
- *          <p>
- *          Copyright (C) 2015 The Android Open Source Project
- *          <p/>
- *          Licensed under the Apache License, Version 2.0 (the "License");
- *          you may not use this file except in compliance with the License.
- *          You may obtain a copy of the License at
- *          <p/>
- * @see <a href = "http://www.aprenderaprogramar.com" /> http://www.apache.org/licenses/LICENSE-2.0 </a>
- * <p/>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Always need implement the DataSource Interfaces of the repository
+ * to get the methods of the repository behavior
  */
-@Singleton
-public class ThemeRemote implements ThemeDataSource {
+final class ThemeRemoteDoc implements ThemeDataSource {
 
+    private static ThemeRemoteDoc instance = null;
+
+    public static ThemeRemoteDoc newInstance() {
+        if (instance == null) {
+            instance = new ThemeRemoteDoc();
+        }
+        return instance;
+    }
+    /**
+     * Set the direct dependency o
+     */
     private static RestClientPublic getRestClientPublic() {
         return RestClientPublic.getInstance();
     }
-
-    @Inject
-    public ThemeRemote() {
-    }
-
+    /**
+     * Always need implement the DataSource Interfaces of the repository
+     * to get the methods of the repository behavior
+     */
     @Override
     public Observable<List<Theme>> getThemes() {
         return getRestClientPublic().getPublicService().getThemes()

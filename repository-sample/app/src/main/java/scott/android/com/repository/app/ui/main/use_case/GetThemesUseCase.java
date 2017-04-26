@@ -1,14 +1,17 @@
-package scott.android.com.repository.data;
+package scott.android.com.repository.app.ui.main.use_case;
 
+import java.util.List;
 
+import javax.inject.Inject;
+
+import rx.Observable;
+import scott.android.com.repository.base.use_case.UseCase;
 import scott.android.com.repository.data.repositories.ThemeRepository;
-import scott.android.com.repository.data.repositories.source.ThemeLocal;
-import scott.android.com.repository.data.repositories.source.ThemeLocalRealm;
-import scott.android.com.repository.data.repositories.source.ThemeRemote;
+import scott.android.com.repository.entities.Theme;
 
 /**
  * @author pedroscott. scott7462@gmail.com
- * @version 1/19/17.
+ * @version 4/14/17.
  *          <p>
  *          Copyright (C) 2015 The Android Open Source Project
  *          <p/>
@@ -24,10 +27,21 @@ import scott.android.com.repository.data.repositories.source.ThemeRemote;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class Injection {
 
-    public static ThemeRepository provideThemeRepository() {
-        return new ThemeRepository(new ThemeLocal(),new ThemeRemote());
+
+public class GetThemesUseCase extends UseCase<List<Theme>> {
+
+    private final ThemeRepository teamsRepository;
+
+    @Inject
+    public GetThemesUseCase(ThemeRepository teamsRepository) {
+        this.teamsRepository = teamsRepository;
     }
+
+    @Override
+    protected Observable<List<Theme>> createObservableUseCase() {
+        return teamsRepository.getThemes();
+    }
+
 
 }

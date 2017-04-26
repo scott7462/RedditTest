@@ -1,6 +1,12 @@
 package scott.android.com.repository.data.repositories;
 
+import android.support.annotation.NonNull;
+
 import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -27,31 +33,27 @@ import scott.android.com.repository.entities.Theme;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public final class ThemeRepository implements ThemeDataSource {
+@Singleton
+public class ThemeRepository implements ThemeDataSource {
 
+    public static final String LOCAL_NAMED = "theme_local";
+    public static final String REMOTE_NAMED = "theme_remote";
     private ThemeDataSource local;
     private ThemeDataSource remote;
 
-    private static ThemeRepository instance = null;
-
-    private ThemeRepository(ThemeDataSource local, ThemeDataSource remote) {
+    @Inject
+    public ThemeRepository(@Named(LOCAL_NAMED) @NonNull ThemeDataSource local,
+                           @Named(REMOTE_NAMED) @NonNull ThemeDataSource remote) {
         this.local = local;
         this.remote = remote;
-    }
-
-    public static ThemeRepository newInstance(ThemeDataSource local, ThemeDataSource remote) {
-        if (instance == null) {
-            instance = new ThemeRepository(local, remote);
-        }
-        return instance;
     }
 
     @Override
     public Observable<List<Theme>> getThemes() {
         return remote.getThemes()
-                .onErrorResumeNext(new Func1<Throwable, Observable<? extends List<Theme>>>() {
+                .onErrorResumeNext(new Func1<Throwable, Observable<List<Theme>>>() {
                     @Override
-                    public Observable<? extends List<Theme>> call(Throwable throwable) {
+                    public Observable<List<Theme>> call(Throwable throwable) {
                         return local.getThemes();
                     }
                 })
